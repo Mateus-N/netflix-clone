@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import Tmdb from '../../routes/Tmdb'
+import Data from '../../data'
 import MovieRow from '../../components/MovieRow'
 import FeaturedMovie from '../../components/FeaturedMovie'
 import Header from '../../components/Header'
@@ -18,7 +18,7 @@ export default () => {
   useEffect (() => {
     const loadAll = async () => {
       // Pegando a lista de todos os filmes
-      let list = await Tmdb.getHomeList()
+      let list = await Data.getHomeList()
       setMovieList (list)
 
       // Pegando o FeaturedMovie
@@ -27,8 +27,8 @@ export default () => {
       let randomChosen  = Math.floor ( Math.random() * (originals[0].items.results.length - 1))
       // Selecionando item aleatório
       let chosen = originals[0].items.results[randomChosen]
-      // Envio do ID escolhido acima para a função no arquivo Tmdb.jsx
-      let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv')
+      // Envio do ID escolhido acima para a função no arquivo data.jsx
+      let chosenInfo = await Data.getMovieInfo(chosen.id, 'tv')
       // Adicionando as informações ao featuredData
       setFeaturedData (chosenInfo)
     }
@@ -72,7 +72,12 @@ export default () => {
         {/* Exibição do componente repetido de acordo com a função .map para a lista filmes */}
         {movieList.map((item, key) => (
           // Componente exportando props para serem resgatados no arquivo MovieRow
-          <MovieRow key={key} title={item.title} items={item.items} />
+          <MovieRow
+            key={key}
+            title={item.title}
+            items={item.items}
+            id={item.id}
+          />
         ))}
       </section>
 

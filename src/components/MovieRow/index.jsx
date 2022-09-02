@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import './styles.css'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -49,13 +50,20 @@ export default ({ title, items }) => {
           width: items.results.length * 150
         }}>
           {/* Função que irá expor na tela todos as capas de filmes com a função .map */}
-          {items.results.length > 0 && items.results.map (( item, key) => (
+          {items.results.length > 0 && items.results.map (( item, key) => {
+              let movieId = item.id
+          return (
             // Identificação do elemento poster
             <div key={key} className="movieRow--item">
               {/* Link concatenado para buscar os posters dos filmes */}
-              <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
+              <Link
+                to={`${movieId}`}
+                key={movieId}
+              >
+                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
+              </Link>
             </div>
-          ))}
+          )})}
         </div>
       </div>
 

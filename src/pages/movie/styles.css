@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.container {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.movie--vertical {
+  width: inherit;
+  height: inherit;
+  background: linear-gradient(to top, #111 10%, transparent 90%);
+}
+
+.movie--horizontal {
+  width: inherit;
+  height: inherit;
+  background: linear-gradient(to right, #111 30%, transparent 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px 0 150px 30px;
+}
+
+.movie--name {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.movie--info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.movie--points, .movie--year, .movie--seasons {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.movie--points {
+  color: #46D369;
+}
+
+.movie--description {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #999;
+  max-width: 40%;
+}
+
+.movie--buttons {
+  margin-top: 15px;
+}
+
+.movie--watchbutton, .movie--mylistbutton {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin: 0 10px 10px 0;
+  opacity: 1;
+  transition: all ease 0.2s;
+}
+
+.movie--watchbutton:hover , .movie--mylistbutton:hover {
+  opacity: 70%;
+}
+
+.movie--watchbutton {
+  background-color: #F00;
+  color: #000;
+}
+
+.movie--mylistbutton {
+  background-color: #333;
+  color: #FFF;
+}
