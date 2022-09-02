@@ -60,13 +60,15 @@
   padding: 12px 25px;
   border-radius: 5px;
   text-decoration: none;
-  margin: 0 10px 10px 0;
+  margin: 0 5px 10px 0;
   opacity: 1;
   transition: all ease 0.2s;
+  scale: 0.9;
 }
 
 .movie--watchbutton:hover , .movie--mylistbutton:hover {
   opacity: 70%;
+  scale: 1.1;
 }
 
 .movie--watchbutton {
