@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { Link } from 'react-router-dom'
 import './styles.css'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import * as Dialog from '@radix-ui/react-dialog';
 
 // Função que será exportada
 export default ({ title, items }) => {
@@ -50,23 +50,39 @@ export default ({ title, items }) => {
           width: items.results.length * 150
         }}>
           {/* Função que irá expor na tela todos as capas de filmes com a função .map */}
-          {items.results.length > 0 && items.results.map (( item, key) => {
-              let movieId = item.id
-          return (
+          {items.results.length > 0 && items.results.map (( item, key) => (
             // Identificação do elemento poster
-            <div key={key} className="movieRow--item">
-              {/* Link concatenado para buscar os posters dos filmes */}
-              <Link
-                to={`${movieId}`}
-                key={movieId}
-              >
-                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
-              </Link>
-            </div>
-          )})}
+            <Dialog.Root>
+              <div key={key} className="movieRow--item">
+                {/* Link concatenado para buscar os posters dos filmes */}
+                <Dialog.Trigger className="modal--trigger">
+                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                  <Dialog.Overlay className="modal--overlay" />
+                  <Dialog.Content className="modal--container">
+                    <div
+                      style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}
+                      className="modal--header"
+                    >
+                      <div className="modal--vertical">
+                        <Dialog.Title className="modal--title">
+                        {item.original_name}
+                        </Dialog.Title>
+                        <div className="modal--control">
+                          <button>Assistir</button>
+                          <div>+</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </div>
+            </Dialog.Root>
+          ))}
         </div>
       </div>
-
     </div>
   )
 }
